@@ -1,0 +1,75 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = null;
+
+}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>گالری رستوران</title>
+    <link href="@Url.Content("~/css/StyleSheet2.css")" rel="stylesheet">
+</head>
+<body>
+
+    <!-- صفحه بارگذاری -->
+    <div id="loading-screen">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- بنر بالا -->
+    <div class="glassi">
+        <div id="top-banner">
+            <h1 class="nastaliq">خوشمزه شروع کنید!</h1>
+        </div>
+    </div>
+
+    <!-- عکس بزرگ تمام‌عرض بالا -->
+    <img src="https://tourismagency.ir/wp-content/uploads/2017/09/Paris-Restaurants-with-cool-views-2.jpg" alt="تصویر بزرگ" class="fullscreen-image">
+
+    <!-- بخش نقشه و عکس کنار هم -->
+    <div class="location-map">
+        <!-- متن در سمت چپ -->
+        <div class="map-overlay-text">
+            <h3>برخی از عواملی که رستوران الماس را شایسته انتخاب شما عزیزان کرده است:</h3>
+            <ul>
+                <li>استفاده از گوشت تازه گوسفندی در کشتارگاه‌های مورد تایید وزارت بهداشت در استان</li>
+                <li>استفاده از مرغ کشتار روز در بسته‌بندی‌های مورد تایید وزارت بهداشت</li>
+                <li>استفاده از میگو و ماهی‌های تایید شده توسط اداره شیلات</li>
+                <li>استفاده از سبزیجات، فرنگی‌جات و سیفی‌جات به‌ صورت روزانه و ضدعفونی اصولی</li>
+                <li>استفاده از برنج درجه یک 100% ایرانی</li>
+                <li>استفاده از ظروف آلومینیوم و P.P</li>
+                <li>استفاده از روغن‌های مایع لادن</li>
+                <li>طبخ سرخ‌کردنی‌ها فقط با روغن تازه</li>
+                <li>حضور پرسنل در کلاس‌های بهداشت محیط</li>
+                <li>همکاری با لابراتوارهای تست مواد غذایی به‌ صورت ماهیانه</li>
+            </ul>
+            <br />
+            <a href="33348877">تماس با ما : 33348877</a>
+        </div>
+
+        <!-- نقشه کرمان -->
+        <div class="gallery-pair"></div>
+        <iframe src="https://maps.google.com/maps?q=کرمان میدان پژوهش&output=embed"
+                allowfullscreen
+                loading="lazy">
+        </iframe>
+    </div>
+
+    <!-- دکمه ناوبری -->
+    <div class="nav-buttons">
+        <a asp-controller="Home" asp-action="MENU">بعدی</a>
+    </div>
+    <script>
+        window.onload = function () {
+            setTimeout(function () {
+                const loadingScreen = document.getElementById('loading-screen');
+                loadingScreen.style.display = 'none';
+            }, 3000);
+        };
+    </script>
+
+</body>
+</html>

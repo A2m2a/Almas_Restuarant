@@ -1,0 +1,98 @@
+/* تنظیمات کلی برای کل صفحه */
+body {
+    margin: 0; /* حذف فاصله پیش‌فرض مرورگر */
+    padding: 0; /* حذف فضای داخلی پیش‌فرض مرورگر */
+    font-family: 'Tahoma', sans-serif; /* انتخاب فونت مناسب فارسی */
+    direction: rtl; /* نمایش از راست به چپ برای متن فارسی */
+    height: 100vh; /* ارتفاع کامل معادل ارتفاع صفحه نمایش */
+
+    background-color: #000000; /* رنگ پس‌زمینه مشکی */
+    position: relative; /* برای اینکه بتونیم عناصر مطلق داخلش قرار بدیم */
+}
+
+/* افزودن عکس سمت چپ با استفاده از ::after */
+body::after {
+    content: ""; /* ایجاد یک عنصر مجازی */
+    position: absolute; /* قرارگیری آزاد در صفحه */
+    top: 50%; /* وسط عمودی صفحه */
+    left: 60px; /* فاصله از سمت چپ صفحه */
+    transform: translateY(-50%); /* تنظیم دقیق وسط‌چین عمودی */
+    width: 800px; /* عرض عکس */
+    height:600px; /* ارتفاع عکس */
+    background-image: url('https://static.vecteezy.com/system/resources/thumbnails/025/483/968/small_2x/gourmet-grilled-meat-on-plate-glowing-with-heat-generated-by-ai-free-photo.jpg'); /* آدرس عکس (قابل تغییر توسط شما) */
+    background-size: cover; /* کشیده شدن عکس برای پر کردن کامل قاب */
+    background-position: center; /* قرارگیری مرکز عکس در وسط قاب */
+    border-radius: 12px; /* گرد شدن گوشه‌های عکس */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.4); /* سایه برای زیبایی عکس */
+    z-index: 1; /* در لایه زیر فرم ورود */
+}
+
+/* باکس ورود (فرم لاگین) */
+.auth-box {
+    position: absolute; /* جای‌گذاری آزاد با استفاده از top و right */
+    top: 50%; /* بالا از وسط صفحه */
+    right: 80px; /* فاصله از لبه راست صفحه */
+    transform: translateY(-50%); /* تنظیم دقیق برای وسط‌چین شدن عمودی */
+
+    width: 400px; /* عرض باکس */
+    padding: 40px; /* فضای داخلی اطراف محتوا */
+    background-color: rgba(255, 255, 255, 0.0); /* پس‌زمینه سفید با شفافیت ۹۵٪ */
+    border-radius: 12px; /* گردی گوشه‌های باکس */
+    box-shadow: 0 0 15px rgba(199, 53, 5, 0.677); /* سایه ملایم دور باکس */
+    text-align: center; /* مرکز چین کردن محتوا */
+    z-index: 2; /* جلوتر از عکس قرار می‌گیرد */
+}
+
+/* عنوان بالای فرم (کلمه "ورود") */
+.auth-box h2 {
+    margin-bottom: 30px; /* فاصله پایین از عنوان */
+    color: #ff2f00; /* رنگ تیره برای عنوان */
+}
+
+/* فیلدهای ورود (نام کاربری و رمز عبور) */
+.auth-box input[type="text"],
+.auth-box input[type="password"] {
+    width: 93%; /* تقریبا تمام عرض فرم */
+    padding: 12px; /* فضای داخلی */
+    margin-bottom: 20px; /* فاصله بین فیلدها */
+    border: 1px solid #ff5a1e; /* خط حاشیه خاکستری */
+    border-radius: 8px; /* گردی گوشه فیلدها */
+    font-size: 14px; /* اندازه متن درون فیلد */
+}
+
+/* دکمه ورود */
+.auth-box button {
+    width: 100%; /* عرض کامل دکمه */
+    padding: 12px; /* فضای داخلی */
+    background-color: #ff2f00; /* رنگ آبی اصلی */
+    color: white; /* رنگ متن سفید */
+    border: none; /* بدون حاشیه */
+    border-radius: 8px; /* گردی گوشه دکمه */
+    font-size: 15px; /* اندازه فونت دکمه */
+    cursor: pointer; /* نشانگر موس به حالت دست */
+    transition: background-color 0.3s ease; /* انیمیشن نرم هنگام هاور */
+}
+
+/* دکمه هنگام هاور (موس روی آن برود) */
+.auth-box button:hover {
+    background-color: #f37644; /* آبی تیره‌تر هنگام هاور */
+}
+
+/* بخش لینک‌ها (ثبت‌نام و فراموشی رمز) */
+.auth-box .links {
+    margin-top: 30px; /* فاصله از دکمه ورود */
+    display: flex; /* نمایش لینک‌ها در کنار هم */
+    justify-content: space-between; /* فاصله مساوی بین لینک‌ها */
+    font-size: 13px; /* اندازه فونت لینک‌ها */
+}
+
+/* لینک‌ها */
+.auth-box .links a {
+    color: #ff2f00c0; /* رنگ آبی برای لینک‌ها */
+    text-decoration: none; /* بدون خط زیر لینک */
+}
+
+/* هاور لینک‌ها */
+.auth-box .links a:hover {
+    text-decoration: underline; /* نمایش خط زیر هنگام هاور */
+}

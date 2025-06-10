@@ -1,0 +1,146 @@
+﻿body { /* تنظیمات کلی برای کل صفحه */
+    margin: 0;
+    padding: 0;
+    font-family: 'Tahoma', sans-serif;
+    direction: rtl;
+    height: 100vh;
+    background-color: #000000;
+    position: relative;
+}
+     /* افزودن عکس سمت چپ با استفاده از ::after */
+body::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 60px;
+        transform: translateY(-50%);
+        width: 800px;
+        height: 600px;
+        background-image: url('https://media.istockphoto.com/id/531464366/photo/beef-steaks-on-the-grill.jpg?s=612x612&w=0&k=20&c=gP5ViGnJ08YTzXthSOMKzZEMqtAbcM2jhEao09W1kAQ=');
+        background-size: cover;
+        background-position: center;
+        border-radius: 12px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+        z-index: 1;
+    }
+
+/* باکس ورود (فرم لاگین) */
+.auth-box {
+    position: absolute;
+    top: 50%;
+    right: 80px;
+    transform: translateY(-50%);
+    width: 400px;
+    padding: 40px;
+    background-color: rgba(255, 255, 255, 0.0);
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(199, 53, 5, 0.677);
+    text-align: center;
+    z-index: 2;
+}
+
+    /* عنوان بالای فرم (کلمه "ورود") */
+    .auth-box h2 {
+        margin-bottom: 30px;
+        color: #ff2f00;
+    }
+
+    /* فیلدهای ورود (نام کاربری و رمز عبور) */
+    .auth-box input[type="text"],
+    .auth-box input[type="password"] {
+        width: 93%;
+        padding: 12px;
+        margin-bottom: 20px;
+        border: 1px solid #ff5a1e;
+        border-radius: 8px;
+        font-size: 14px;
+    }
+
+    /* دکمه ورود */
+    .auth-box button {
+        width: 100%;
+        padding: 12px;
+        background-color: #ff2f00;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 15px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        /* دکمه هنگام هاور */
+        .auth-box button:hover {
+            background-color: #f37644;
+        }
+
+    /* بخش لینک‌ها (ثبت‌نام و فراموشی رمز) */
+    .auth-box.links {
+        margin-top: 30px;
+        display: flex;
+        justify-content: space-between;
+        font-size: 13px;
+    }
+
+        /* لینک‌ها */
+        .auth-box .links a {
+            color: #ff2f00c0;
+            text-decoration: none;
+        }
+
+            /* هاور لینک‌ها */
+            .auth-box .links a:hover {
+                text-decoration: underline;
+            }
+.alert {
+    padding: 10px 20px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.alert-warning {
+    background-color: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeeba;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+#loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #cfb012;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.spinner {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #006d5b 20%, transparent 21%) 0 0, radial-gradient(circle, #2ecc71 20%, transparent 21%) 10px 10px;
+    background-size: 20px 20px;
+    background-repeat: repeat;
+    animation: rotate-pattern 1.2s linear infinite;
+    box-shadow: 0 0 20px rgba(0, 109, 91, 0.4);
+}
+
+@keyframes rotate-pattern {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}

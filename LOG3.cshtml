@@ -1,0 +1,53 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = null;
+
+}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <title>فراموشی رمز عبور</title>
+    <link rel="stylesheet"  href="@Url.Content("~/css/StyleSheet3p.css")" />
+</head>
+<body>
+    <div id="loading-screen">
+        <div class="spinner"></div>
+    </div>
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-warning">
+            @TempData["Error"]
+        </div>
+    }
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["Success"]
+        </div>
+    }
+
+    <div class="auth-box">
+        <h2>فراموشی رمز عبور</h2>
+        <form asp-controller="Home" asp-action="LOG3" method="post">
+            <input type="text" name="username" placeholder="نام کاربری" required />
+            <input type="password" name="newPassword" placeholder="رمز عبور جدید" required />
+            <button type="submit">تغییر رمز عبور</button>
+        </form>
+        <div class="links">
+            <a asp-controller="Home" asp-action="LOG1">بازگشت به ورود</a>
+        </div>
+    </div>
+    <script>
+        window.onload = function () {
+            setTimeout(function () {
+                const loadingScreen = document.getElementById('loading-screen');
+                loadingScreen.style.display = 'none';
+            }, 1000);
+        };
+    </script>
+
+</body>
+</html>
