@@ -1,0 +1,127 @@
+﻿@model آخرین_الماس.Models.HomeViewModel   // مدل صفحه را مشخص می‌کنیم
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Antiforgery  // سرویس ضد جعل (CSRF) را وارد می‌کنیم
+@{
+    // Layout را می‌توان غیرفعال کرد
+    // Layout = null;
+
+    // گرفتن توکن CSRF و ذخیره در متغیر tokens
+    var tokens = Antiforgery.GetAndStoreTokens(ViewContext.HttpContext);
+}
+<!DOCTYPE html>
+<!-- نوع سند HTML -->
+<html lang="fa" dir="rtl">
+<!-- زبان فارسی و راست به چپ -->
+<head>
+    <meta charset="UTF-8"> <!-- رمزگذاری UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"> <!-- تنظیمات نمای موبایل -->
+    <title class="nastaliq">نظرسنجی</title> <!-- عنوان صفحه -->
+    <!-- فونت فارسی نستعلیق -->
+    <link href="https://v1.fontapi.ir/css/IranNastaliq" rel="stylesheet">
+
+    <!-- بارگذاری CSS بوت‌استرپ نسخه ۵ -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- فایل CSS سفارشی -->
+    <link rel="stylesheet" href="~/css/StyleSheet4.css" asp-append-version="true" />
+
+    <!-- متا تگ برای ارسال CSRF به جاوااسکریپت -->
+    <meta name="csrf-token" content="@tokens.RequestToken" />
+</head>
+<body>
+    <!-- صفحه بارگذاری اولیه -->
+    <div id="loading-screen">
+        @Html.AntiForgeryToken() <!-- توکن CSRF برای فرم‌ها -->
+
+        <div class="spinner"></div> <!-- انیمیشن چرخان بارگذاری -->
+    </div>
+
+    <div class="container">
+        <h3 class="text-center mb-4">نظرتان برای ما مهم است</h3> <!-- عنوان فرم -->
+        <!-- فرم ارسال نظر -->
+        <form asp-controller="Home" asp-action="SubmitFeedback" method="post">
+            @Html.AntiForgeryToken() <!-- توکن CSRF -->
+            <!-- کادر متن برای نوشتن نظر -->
+            <textarea name="Message" required placeholder="نظرت را بنویس..."></textarea>
+
+            <!-- انتخاب رتبه با ستاره‌ها -->
+            <div class="star-rating">
+                <input type="radio" id="star5" name="Rating" value="5" />
+                <label for="star5" title="عالی">&#9733;</label>
+
+                <input type="radio" id="star4" name="Rating" value="4" />
+                <label for="star4" title="خیلی خوب">&#9733;</label>
+
+                <input type="radio" id="star3" name="Rating" value="3" />
+                <label for="star3" title="خوب">&#9733;</label>
+
+                <input type="radio" id="star2" name="Rating" value="2" />
+                <label for="star2" title="متوسط">&#9733;</label>
+
+                <input type="radio" id="star1" name="Rating" value="1" />
+                <label for="star1" title="ضعیف">&#9733;</label>
+            </div>
+            <!-- دکمه ارسال نظر -->
+            <button type="submit">ارسال نظر</button>
+        </form>
+
+        <hr /> <!-- خط جداکننده -->
+        <!-- نمایش لیست نظرات کاربران -->
+        <div id="feedbackList" class="mt-4">
+            <h4>نظرات کاربران:</h4>
+
+            @if (Model.Feedbacks != null && Model.Feedbacks.Any()) // اگر نظری ثبت شده باشد
+            {
+                <ul class="list-group">
+                    @foreach (var feedback in Model.Feedbacks) // برای هر نظر
+                    {
+                        <li class="list-group-item">
+                            <!-- نام کاربر و متن نظر -->
+                            <strong>@feedback.Username:</strong> @feedback.Message
+                            <br />
+
+                            <!-- نمایش ستاره‌ها با رنگ طلایی و خاکستری -->
+                            <span class="star-display">
+                                @for (int i = 1; i <= 5; i++) // ۵ ستاره
+                                {
+                                    if (i <= feedback.Rating) // ستاره‌های پر شده
+                                    {
+                                        <span style="color: gold;">&#9733;</span>
+                                    }
+                                    else // ستاره‌های خالی
+                                    {
+                                        <span style="color: gray;">&#9733;</span>
+                                    }
+                                }
+                            </span>
+                            <br />
+
+                            <!-- تاریخ و ساعت ثبت نظر -->
+                            <small class="text-muted"> @feedback.CreatedAt.ToString("yyyy/MM/dd HH:mm")</small>
+                        </li>
+                    }
+                </ul>
+            }
+            else // اگر نظری ثبت نشده باشد
+            {
+                <p class="text-muted">هنوز نظری ثبت نشده است.</p>
+            }
+        </div>
+        </div>
+        <!-- دکمه بازگشت -->
+        <div class="mt-4 text-start">
+            @Html.AntiForgeryToken()
+            <a href="/Home/PASSMENU" class="btn btn-outline-danger">قبلی</a>
+        </div>
+        <br />
+        <br />
+        <!-- جاوااسکریپت برای مخفی کردن صفحه بارگذاری بعد از ۵ ثانیه -->
+        <script>
+            window.onload = function () {
+                setTimeout(function () {
+                    const loadingScreen = document.getElementById('loading-screen');
+                    loadingScreen.style.display = 'none'; // مخفی کردن صفحه بارگذاری
+                }, 5000); // ۵ ثانیه
+            };
+        </script>
+</body>
+</html>

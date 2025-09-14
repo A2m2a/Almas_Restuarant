@@ -1,0 +1,166 @@
+﻿/* --- بدنه صفحه --- */
+body {
+    background-color: #ffffff; /* رنگ پس‌زمینه سفید */
+    font-family: 'IranNastaliq', Tahoma, sans-serif; /* فونت اصلی صفحه */
+    padding: 20px; /* فاصله داخلی از چهار طرف */
+    color: #5a1e1e; /* رنگ متن اصلی */
+}
+
+/* --- باکس بازخورد --- */
+.feedback-box {
+    background-color: #fffafa; /* رنگ پس‌زمینه باکس */
+    border-left: 6px solid #ff4d4d; /* خط رنگی سمت چپ */
+    border-radius: 16px; /* گوشه‌های گرد */
+    width: 600px; /* عرض ثابت باکس */
+    max-width: 90%; /* حداکثر عرض برای موبایل */
+    padding: 30px; /* فاصله داخلی */
+    margin: 50px auto; /* فاصله از بالا و وسط چین کردن افقی */
+    box-shadow: 0 10px 25px rgba(90, 30, 30, 0.1); /* سایه ملایم */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* افکت حرکت و سایه */
+    font-family: 'IranNastaliq', Tahoma, sans-serif; /* فونت باکس */
+}
+
+    .feedback-box:hover {
+        transform: translateY(-5px); /* حرکت باکس به سمت بالا هنگام هاور */
+        box-shadow: 0 15px 35px rgba(90, 30, 30, 0.15); /* سایه پررنگ‌تر هنگام هاور */
+    }
+
+/* --- textarea برای نوشتن نظر --- */
+textarea[name="Message"] {
+    width: 100%; /* پهنای کامل باکس والد */
+    min-height: 100px; /* حداقل ارتفاع */
+    padding: 16px; /* فاصله داخلی */
+    border: 2px solid #ff4d4d; /* حاشیه قرمز */
+    border-radius: 12px; /* گوشه‌های گرد */
+    font-size: 1em; /* اندازه فونت */
+    resize: vertical; /* فقط قابلیت تغییر ارتفاع */
+    outline: none; /* حذف حاشیه پیش‌فرض هنگام فوکوس */
+    transition: border-color 0.3s, box-shadow 0.3s; /* افکت تغییر رنگ و سایه هنگام فوکوس */
+    font-family: 'IranNastaliq', Tahoma, sans-serif; /* فونت textarea */
+}
+
+    textarea[name="Message"]:focus {
+        border-color: #e63939; /* تغییر رنگ حاشیه هنگام فوکوس */
+        box-shadow: 0 0 12px rgba(255,77,77,0.25); /* سایه ملایم هنگام فوکوس */
+    }
+
+/* --- دکمه‌ها --- */
+button[type="submit"], .btn {
+    background: linear-gradient(45deg, #ff4d4d, #ff1a1a); /* گرادینت قرمز زاویه دار */
+    color: #fff; /* رنگ متن سفید */
+    border: none; /* حذف حاشیه پیش‌فرض */
+    padding: 12px 28px; /* فاصله داخلی عمودی و افقی */
+    border-radius: 25px; /* گوشه‌های گرد */
+    font-size: 1em; /* اندازه فونت */
+    cursor: pointer; /* تغییر نشانگر موس به دست */
+    transition: transform 0.2s, box-shadow 0.2s; /* افکت حرکت و سایه هنگام هاور */
+    font-family: 'IranNastaliq', Tahoma, sans-serif; /* فونت دکمه */
+}
+
+    button[type="submit"]:hover, .btn:hover {
+        transform: translateY(-2px); /* حرکت کمی به بالا هنگام هاور */
+        box-shadow: 0 5px 15px rgba(255,77,77,0.4); /* سایه پررنگ‌تر هنگام هاور */
+    }
+
+/* --- ستاره‌های رتبه‌بندی --- */
+.star-rating {
+    direction: rtl; /* راست به چپ برای ستاره‌ها */
+    font-size: 1em; /* اندازه فونت */
+    margin: 12px 0; /* فاصله بالا و پایین */
+}
+
+    .star-rating input[type="radio"] {
+        display: none; /* مخفی کردن دکمه‌های رادیویی */
+    }
+
+    .star-rating label {
+        cursor: pointer; /* موس به شکل دست */
+        color: #ccc; /* رنگ خاکستری ستاره‌ها */
+        font-size: 2em; /* بزرگ کردن ستاره‌ها */
+        transition: color 0.2s, transform 0.2s; /* افکت رنگ و حرکت */
+    }
+
+        .star-rating input[type="radio"]:checked ~ label,
+        .star-rating label:hover,
+        .star-rating label:hover ~ label {
+            color: #ffb400; /* رنگ طلایی هنگام انتخاب یا هاور */
+            transform: scale(1.2); /* بزرگ شدن ستاره هنگام هاور یا انتخاب */
+        }
+
+/* --- لیست نظرات کاربران --- */
+.list-group {
+    padding: 0; /* حذف فاصله داخلی پیش‌فرض */
+    list-style: none; /* حذف بولت لیست */
+    border: 1px solid #ffcccc; /* حاشیه خارجی */
+    border-radius: 12px; /* گوشه‌های گرد */
+    background-color: #fff5f5; /* رنگ پس‌زمینه */
+    max-height: 300px; /* حداکثر ارتفاع */
+    overflow-y: auto; /* اسکرول عمودی اگر محتوا زیاد باشد */
+}
+
+.list-group-item {
+    padding: 14px 18px; /* فاصله داخلی */
+    border-bottom: 1px solid #ffcccc; /* خط جداکننده بین آیتم‌ها */
+    background-color: #fffafa; /* رنگ پس‌زمینه آیتم */
+    border-radius: 8px; /* گوشه‌های گرد آیتم */
+    margin: 6px; /* فاصله بین آیتم‌ها */
+    transition: background 0.3s, transform 0.2s; /* افکت تغییر رنگ و حرکت */
+}
+    .list-group-item:hover {
+        background-color: #ffe5e5; /* رنگ پس‌زمینه هنگام هاور */
+        transform: translateX(3px); /* حرکت کمی به راست هنگام هاور */
+    }
+
+/* --- دکمه "قبلی" داخل باکس --- */
+.text-start {
+    text-align: left; /* متن به چپ چین */
+    margin-top: 20px; /* فاصله از بالا */
+}
+
+/* --- صفحه بارگذاری --- */
+#loading-screen {
+    position: fixed; /* ثابت در صفحه */
+    top: 0; /* از بالا */
+    left: 0; /* از چپ */
+    width: 100vw; /* پهنای کل صفحه */
+    height: 100vh; /* ارتفاع کل صفحه */
+    background-color: #ff6b6b; /* رنگ پس‌زمینه قرمز */
+    display: flex; /* استفاده از فلکس باکس */
+    justify-content: center; /* وسط چین کردن افقی */
+    align-items: center; /* وسط چین کردن عمودی */
+    z-index: 9999; /* بالاتر از همه عناصر */
+}
+
+.spinner {
+    width: 80px; /* عرض چرخان */
+    height: 80px; /* ارتفاع چرخان */
+    border-radius: 50%; /* دایره کامل */
+    background: radial-gradient(circle, #006d5b 20%, transparent 21%) 0 0, radial-gradient(circle, #2ecc71 20%, transparent 21%) 10px 10px; /* الگوی دایره‌ای */
+    background-size: 20px 20px; /* اندازه الگو */
+    background-repeat: repeat; /* تکرار الگو */
+    animation: rotate-pattern 1.2s linear infinite; /* انیمیشن چرخش */
+    box-shadow: 0 0 20px rgba(0, 109, 91, 0.4); /* سایه */
+}
+
+@keyframes rotate-pattern {
+    0% {
+        transform: rotate(0deg); /* شروع چرخش */
+    }
+
+    100% {
+        transform: rotate(360deg); /* پایان چرخش کامل */
+    }
+}
+
+/* --- ریسپانسیو موبایل --- */
+@media (max-width: 768px) {
+    .feedback-box {
+        width: 90%; /* پهنای بیشتر برای موبایل */
+        padding: 20px; /* کاهش فاصله داخلی */
+        margin: 30px auto; /* کاهش فاصله بالا */
+    }
+
+    .star-rating {
+        font-size: 1.5em; /* بزرگتر کردن ستاره‌ها برای موبایل */
+    }
+}

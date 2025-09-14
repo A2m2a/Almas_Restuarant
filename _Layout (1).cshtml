@@ -1,0 +1,109 @@
+﻿@using آخرین_الماس.Models
+@using Microsoft.AspNetCore.Http
+@{
+    // دریافت نام کاربری از Session
+    var username = Context.Session.GetString("Username");
+
+    // نام صفحه‌ی فعلی (Action) برای شرط نمایش پروفایل
+    var currentPage = ViewContext.RouteData.Values["action"]?.ToString();
+
+    // آرایه‌ای از صفحات که در آنها آیکون پروفایل نمایش داده نشود
+    var hideOnPages = new[] { "LOG1", "LOG2", "LOG3" };
+}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="utf-8" /> <!-- تعیین کدگذاری UTF-8 برای پشتیبانی از زبان فارسی -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- تنظیم ریسپانسیو بودن صفحه -->
+
+    <title>@ViewData["Title"] - آخرین_الماس</title> <!-- عنوان صفحه با اضافه کردن نام سایت -->
+    <!-- لینک به فایل CSS Bootstrap نسخه 5.3.0 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- لینک به CSS سفارشی سایت -->
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+    <style>
+        /* کانتینر آیکون پروفایل */
+        body .profile-btn-container {
+            position: fixed; /* قرار گرفتن ثابت در صفحه حتی هنگام اسکرول */
+            top: 10px; /* فاصله از بالای صفحه */
+            left: 10px; /* فاصله از سمت چپ صفحه */
+            z-index: 1000; /* نمایش روی سایر عناصر */
+        }
+
+            /* دکمه پروفایل */
+            body .profile-btn-container button {
+                border-radius: 50%; /* دکمه گرد */
+                width: 50px; /* عرض دکمه */
+                height: 50px; /* ارتفاع دکمه */
+                font-size: 24px; /* اندازه آیکون داخل دکمه */
+                background-color: #007bff; /* رنگ پس‌زمینه */
+                color: white; /* رنگ آیکون */
+                border: none; /* حذف حاشیه پیش‌فرض */
+                box-shadow: 0 4px 6px rgba(0,0,0,0.2); /* سایه کوچک برای زیبایی */
+                transition: transform 0.2s, box-shadow 0.2s; /* افکت حرکتی و سایه هنگام هاور */
+                /* مرکز کردن آیکون داخل دکمه */
+                display: flex; /* استفاده از Flexbox */
+                justify-content: center; /* وسط افقی */
+                align-items: center; /* وسط عمودی */
+                line-height: 1; /* حذف فاصله خط */
+                padding: 0; /* حذف padding اضافی */
+            }
+
+                /* افکت هاور دکمه پروفایل */
+                body .profile-btn-container button:hover {
+                    transform: scale(1.1); /* کمی بزرگ شدن هنگام هاور */
+                    box-shadow: 0 6px 12px rgba(0,0,0,0.3); /* افزایش سایه هنگام هاور */
+                    cursor: pointer; /* تغییر شکل موس به pointer */
+                }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container-fluid">
+            <!-- کانتینر ریسپانسیو Bootstrap -->
+            <!-- نمایش آیکون پروفایل فقط اگر صفحه جز صفحات مخفی نباشد و کاربر لاگین کرده باشد -->
+            @if (!hideOnPages.Contains(currentPage) && !string.IsNullOrEmpty(username))
+            {
+                <div class="profile-btn-container">
+                    <!-- دکمه آیکون پروفایل -->
+                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#profileModal" title="مشاهده پروفایل">
+                        👤 <!-- آیکون آدمک -->
+                    </button>
+                </div>
+            }
+        </div>
+    </header>
+
+    <main>
+        @RenderBody() <!-- بخش اصلی محتوای صفحه -->
+    </main>
+
+    <!-- اسکریپت‌ها -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script> <!-- کتابخانه jQuery -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> <!-- Bootstrap JS -->
+    <script src="~/js/site.js" asp-append-version="true"></script> <!-- فایل JS اختصاصی سایت -->
+    @RenderSection("Scripts", required: false) <!-- بخش اختیاری برای اسکریپت‌های اضافه در صفحات خاص -->
+    <!-- Modal پروفایل کاربری -->
+    <div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="profileModalLabel">پروفایل کاربری</h5>
+                    <br />
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="بستن"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <p><strong>نام کاربری:</strong> @username</p> <!-- نمایش نام کاربری -->
+                    <hr />
+                    <form method="post" action="/Home/Logout">
+                        <!-- فرم خروج از حساب -->
+                        <button type="submit" class="btn btn-danger">خروج از حساب کاربری</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
