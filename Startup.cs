@@ -26,7 +26,12 @@ namespace آخرین_الماس
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddHttpContextAccessor();
-            services.AddSession();
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromHours(1);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
             services.AddControllersWithViews();
             services.AddDbContext<AppDbContext>(options =>
 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))); 
@@ -55,6 +60,7 @@ options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             app.UseEndpoints(endpoints =>
             {
+
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=LOG1}/{id?}");
